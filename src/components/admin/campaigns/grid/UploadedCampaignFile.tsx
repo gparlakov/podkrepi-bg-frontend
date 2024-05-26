@@ -56,12 +56,14 @@ export default function UploadedCampaignFile({ file, campaignId }: Props) {
     mutation.mutate()
   }
 
-  const blob = new Blob(['<a id="a"><b id="b">hey!</b></a>'], {type : 'text/html'});
-  const newurl = window.URL.createObjectURL(blob);
-
+  // in a preview file handler function we would (much like the downloadFileHandler function above)
+  // downloadCampaignFile(file.id, session)
+  // .then((response) => {
+  // const url = window.URL.createObjectURL(new Blob([response.data], type: {file.mimetype}))
+  const blob = new Blob(['<a id="a"><b id="b">hey!</b></a>'], { type: 'text/html' })
+  const newurl = window.URL.createObjectURL(blob)
 
   return (
-    <>
     <ListItem key={file.id}>
       <ListItemAvatar>
         <Avatar>
@@ -77,8 +79,7 @@ export default function UploadedCampaignFile({ file, campaignId }: Props) {
       <IconButton edge="end" aria-label="delete" onClick={deleteFileHandler}>
         <Delete />
       </IconButton>
+      <iframe id={file.id} src={newurl} />
     </ListItem>
-    <iframe id={file.id} src={newurl} />
-    </>
   )
 }

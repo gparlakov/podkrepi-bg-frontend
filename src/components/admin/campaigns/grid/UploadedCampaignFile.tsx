@@ -56,7 +56,12 @@ export default function UploadedCampaignFile({ file, campaignId }: Props) {
     mutation.mutate()
   }
 
+  const blob = new Blob(['<a id="a"><b id="b">hey!</b></a>'], {type : 'text/html'});
+  const newurl = window.URL.createObjectURL(blob);
+
+
   return (
+    <>
     <ListItem key={file.id}>
       <ListItemAvatar>
         <Avatar>
@@ -73,5 +78,7 @@ export default function UploadedCampaignFile({ file, campaignId }: Props) {
         <Delete />
       </IconButton>
     </ListItem>
+    <iframe id={file.id} src={newurl} />
+    </>
   )
 }

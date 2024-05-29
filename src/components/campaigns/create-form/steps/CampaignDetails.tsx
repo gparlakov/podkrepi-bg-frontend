@@ -4,10 +4,10 @@ import { useTranslation } from 'next-i18next'
 import { styled } from '@mui/system'
 import { Grid, Typography } from '@mui/material'
 
-import FileList from 'components/file-upload/FileList'
-import FileUpload from 'components/file-upload/FileUpload'
+import FileList from 'components/common/file-upload/FileList'
+import FileUpload from 'components/common/file-upload/FileUpload'
 import FormTextField from 'components/common/form/FormTextField'
-import { CampaignFileRole, FileRole } from 'components/campaign-file/roles'
+import { CampaignFileRole, FileRole } from 'components/common/campaign-file/roles'
 
 import Subtitle from '../helpers/Subtitle'
 

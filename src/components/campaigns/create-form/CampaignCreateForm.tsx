@@ -1,20 +1,13 @@
-import Link from 'next/link'
-import { useMutation } from 'react-query'
-import { useTranslation } from 'next-i18next'
-import React, { useState, useRef } from 'react'
-import { AxiosError, AxiosResponse } from 'axios'
 import { FormikHelpers, FormikProps } from 'formik'
+import { useTranslation } from 'next-i18next'
+import Link from 'next/link'
+import { useRef, useState } from 'react'
 
+import { Grid, Step, StepConnector, StepLabel, Stepper, Typography } from '@mui/material'
 import { Theme } from '@mui/material/styles'
+import createStyles from '@mui/styles/createStyles'
 import makeStyles from '@mui/styles/makeStyles'
 import withStyles from '@mui/styles/withStyles'
-import createStyles from '@mui/styles/createStyles'
-import { Stepper, Step, StepLabel, StepConnector, Hidden, Grid, Typography } from '@mui/material'
-
-import { ApiErrors } from 'service/apiErrors'
-import { useCreateCampaign } from 'service/campaign'
-
-import { AlertStore } from 'stores/AlertStore'
 
 import { routes } from 'common/routes'
 import GenericForm from 'components/common/form/GenericForm'
@@ -23,19 +16,19 @@ import Actions from './Actions'
 import StepIcon from './StepperIcon'
 import stepsHandler from './StepsHandler'
 import {
-  Steps,
-  Step as StepType,
-  CampaignFormData,
   CampaignDateTypes,
+  CampaignFormData,
   CoordinatorBeneficiaryRealation,
+  Step as StepType,
+  Steps,
 } from './helpers/campaign-form.types'
 import { validationSchema } from './helpers/validation-schema'
 
-import CoordinatorType from './steps/CoordinatorType'
-import CoordinatorInfo from './steps/CoordinatorInfo'
+import theme from 'common/theme'
 import CampaignDetails from './steps/CampaignDetails'
 import CampaignGeneralInfo from './steps/CampaignGeneralInfo'
-import theme from 'common/theme'
+import CoordinatorInfo from './steps/CoordinatorInfo'
+import CoordinatorType from './steps/CoordinatorType'
 
 const ColorlibConnector = withStyles({
   alternativeLabel: {
@@ -236,14 +229,8 @@ export default function CampaignCreateForm() {
       </GenericForm>
       <Typography sx={{ marginTop: '100px', fontSize: '12px' }}>
         *Допълнителна информация за процеса на кандидатстване и неговите етапи можете да намерите в
-        нашите{' '}
-        <Link href={routes.privacyPolicy}>
-          <a>Общи условия</a>
-        </Link>{' '}
-        и в секцията{' '}
-        <Link href={routes.termsOfService}>
-          <a>Често задавани въпроси</a>
-        </Link>{' '}
+        нашите <Link href={routes.privacyPolicy}>Общи условия</Link> и в секцията{' '}
+        <Link href={routes.termsOfService}>Често задавани въпроси</Link>{' '}
       </Typography>
     </>
   )

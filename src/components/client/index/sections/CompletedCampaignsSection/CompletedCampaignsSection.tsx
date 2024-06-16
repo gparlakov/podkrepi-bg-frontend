@@ -29,6 +29,7 @@ import {
 } from './CompletedCampaignsSection.styled'
 
 export default function CompletedCampaignsSection() {
+  console.log('rerender')
   const { t } = useTranslation('campaigns')
   const { data } = useCampaignList(true)
 
@@ -47,6 +48,7 @@ export default function CompletedCampaignsSection() {
       <Heading variant="h4" px={3}>
         {t('completed-campaigns')}
       </Heading>
+      {/* <button onClick={() => refetch()}>refetch</button> */}
       <CarouselWrapper {...settings}>
         {completedCampaigns?.map((campaign, index) => (
           <CardWrapper key={index} data-testid={`completed-campaign-${index}`}>

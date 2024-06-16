@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { useTranslation } from 'next-i18next'
 import { Grid, Typography } from '@mui/material'
+import { CategoryType } from 'gql/types'
+import { styled } from '@mui/material/styles'
+import { CampaignTypeCategory } from 'components/common/campaign-types/categories'
 
 import CampaignFilter from './CampaignFilter'
 import Layout from 'components/client/layout/Layout'
-
-import { styled } from '@mui/material/styles'
 
 const PREFIX = 'CampaignsPage'
 
@@ -73,6 +74,14 @@ const Root = styled(Layout)(({ theme }) => ({
 export default function CampaignsPage() {
   const { t } = useTranslation()
 
+  const [selectedCategory, setSelectedCategory] = useState<CampaignTypeCategory>(
+    CampaignTypeCategory.medical,
+  )
+
+  const selectCategoryHandler = (category: CategoryType) => {
+    setSelectedCategory(category?.type)
+  }
+
   return (
     <Root maxWidth={false}>
       <Grid>
@@ -82,7 +91,11 @@ export default function CampaignsPage() {
         <Typography variant="h6" component="h2" className={classes.support}>
           {t('campaigns:cta.support-cause-today')}
         </Typography>
-        <CampaignFilter />
+        <CampaignFilter
+          styles={{ maxWidth: 'lg', margin: '0 auto' }}
+          selected={selectedCategory}
+          onClick={selectCategoryHandler}
+        />
       </Grid>
     </Root>
   )

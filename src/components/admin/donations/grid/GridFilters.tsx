@@ -2,7 +2,7 @@ import { Box, TextField } from '@mui/material'
 import Filter from './Filter'
 import { useStores } from '../../../../common/hooks/useStores'
 import { observer } from 'mobx-react'
-import { PaymentStatus, PaymentProvider } from 'gql/donations.enums'
+import { DonationStatus, DonationType } from 'gql/donations.enums'
 import { DateTimePicker, enUS, LocalizationProvider } from '@mui/x-date-pickers'
 import { useTranslation } from 'next-i18next'
 import { bg } from 'date-fns/locale'
@@ -92,14 +92,8 @@ export default observer(function GridFilters() {
         menuItems={donationStatusMenuItems}
       />
       <Filter
-        value={donationStore.donationFilters.paymentProvider}
-        options={paymentProviderOptions}
-        onChange={handleChange}
-        menuItems={paymentProviderMenuItems}
-      />
-      <Filter
-        value={donationStore.donationFilters.sortBy}
-        options={{ name: 'sortBy', label: 'donations:cta.sortBy' }}
+        value={donationStore.donationFilters.type}
+        options={donationTypeOptions}
         onChange={handleChange}
         menuItems={['createdAt', 'amount']}
       />

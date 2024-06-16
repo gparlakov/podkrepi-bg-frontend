@@ -5,6 +5,7 @@ import { useCampaignList } from 'common/hooks/campaigns'
 import CampaignsList from './CampaignsList'
 import { CampaignResponse } from 'gql/campaigns'
 import { CampaignTypeCategory } from 'components/common/campaign-types/categories'
+import { CategoryType } from 'gql/types'
 import { useTranslation } from 'next-i18next'
 import {
   Apartment,
@@ -76,10 +77,25 @@ const categories: {
   art: { icon: <Brush fontSize="small" /> },
   animals: { icon: <Pets fontSize="small" /> },
   nature: { icon: <Forest fontSize="small" /> },
-  others: {},
+  others: { icon: <Category fontSize="small" /> },
+  all: { icon: <FilterNone fontSize="small" /> },
 }
 
-export default function CampaignFilter() {
+type Props = {
+  showCampaigns?: boolean
+  selected: CampaignTypeCategory
+  onClick: (item: CategoryType) => void
+  styles: React.CSSProperties
+  styleItem?: React.CSSProperties
+}
+
+export default function CampaignFilter({
+  selected,
+  styles,
+  styleItem,
+  showCampaigns = true,
+  onClick,
+}: Props) {
   const { t } = useTranslation()
   const { data: campaigns, isLoading } = useCampaignList(true)
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL')
@@ -141,7 +157,7 @@ export default function CampaignFilter() {
           <CircularProgress size="3rem" />
         </Box>
       ) : (
-        <CampaignsList campaignToShow={campaignToShow} />
+        showCampaigns && <CampaignsList campaignToShow={campaignToShow} />
       )}
     </>
   )

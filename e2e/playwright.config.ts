@@ -2,12 +2,11 @@ import type { PlaywrightTestConfig } from '@playwright/test'
 import path from 'path'
 
 const e2eReportsFolder = path.resolve(__dirname, 'e2e-reports')
-
 /**
  * See https://playwright.dev/docs/test-configuration
  */
 
-const config: PlaywrightTestConfig = {
+const config: PlaywrightTestConfig<{ e2eReportsFolder: string; storageFile: string }> = {
   name: 'Podkrepi.bg E2E tests',
   testDir: './tests',
   /* Maximum time one test can run for. */
